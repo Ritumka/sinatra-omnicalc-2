@@ -1,16 +1,23 @@
 require "sinatra"
 require "sinatra/reloader"
+require "better_errors"
+require "binding_of_caller"
+
+use(BetterErrors::Middleware)
+BetterErrors.application_root = __dir__
+BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get("/") do
   redirect("/add")
 end
 
-get("/ad") do
+get("/add") do
   erb(:add_form)
 end
 
 get("/wizard_add") do
   @first_num = params.fetch("first_num").to_f
+  @second_num = params.fetch("second_num").to_f
 
   @result = @first_num + @second_num
   erb(:add_result)

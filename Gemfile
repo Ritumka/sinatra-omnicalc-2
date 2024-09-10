@@ -34,3 +34,6 @@ group :test do
   gem "webdrivers"
   gem "i18n"
 end
+
+gem "better_errors"
+gem "binding_of_caller"
